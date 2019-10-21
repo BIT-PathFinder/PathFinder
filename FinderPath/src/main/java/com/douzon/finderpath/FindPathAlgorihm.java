@@ -1,10 +1,11 @@
 package com.douzon.finderpath;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class FindPathAlgorihm {
-	static int N; // N*N 경로
+	static int N = 16; // N*N 경로
 	static int[][] money; // 비용
 	static String[][] test;
 	static int[] visited; // 방문표시
@@ -50,45 +51,62 @@ public class FindPathAlgorihm {
 	}
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
+		int 반복횟수 = 100;
+		String txt = "";
 
-		money = new int[N][N];
-		visited = new int[N];
-//      test = new String[N][N];
-//      test2 = new String[N];
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				money[i][j] = sc.nextInt();
-//            test[i][j] =i+","+j;
+		String fileName = "C:\\test.txt";
+		try {
+
+			BufferedWriter fw = new BufferedWriter(new FileWriter(fileName, true));
+
+		for (int aaa = 0; aaa < 반복횟수; ++aaa) {
+			money = new int[N][N];
+			visited = new int[N];
+			int row, col;
+			for (row = 0; row <= money.length - 1; row++) {
+				for (col = 0; col <= money.length - 1; col++) {
+					if (row == col) {
+						money[row][col] = 0;
+					} else {
+						if (row > col) {
+							money[row][col] = money[col][row];
+						} else {
+							int r = (int) (Math.random() * 1000);
+							money[row][col] = r;
+						}
+					}
+				}
 			}
+
+			for (row = 0; row <= money.length - 1; row++) {
+				for (col = 0; col <= money.length - 1; col++) {
+					System.out.printf("%3d\t", money[row][col]);
+				}
+				System.out.println();
+			}
+
+			System.out.println();
+
+			price = Integer.MAX_VALUE; // 최소비용을 구해야 하기 때문에 최대값을 저장해둠
+
+			long startTime = System.currentTimeMillis();
+			DFS(1, 0, 0); // 방문도시 개수, 출발도시, 누적 비용
+			long endTime = System.currentTimeMillis();
+
+			System.out.println(price);
+
+			System.out.println(찐큐);
+			// Total time
+			long lTime = endTime - startTime;
+			System.out.println("TIME : " + lTime + "(ms)");
+			fw.write(lTime + "+");
 		}
-		price = Integer.MAX_VALUE; // 최소비용을 구해야 하기 때문에 최대값을 저장해둠
+			fw.flush();
+			fw.close();
 
-		DFS(1, 0, 0); // 방문도시 개수, 출발도시, 누적 비용
-		System.out.println(price);
-//      System.out.println(Arrays.toString(test2));
-//      System.out.println(Arrays.deepToString(test));
-		sc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		System.out.println(찐큐);
 	}
 }
-
-
-//인풋값 5는 N*N이란 뜻. 밑에는 비용
-//5
-//0 14 4 10 20 
-//14 0 7 8 7 
-//4 5 0 7 16 
-//11 7 9 0 2 
-//18 7 17 4 0 
-//
-
-//정답 경로
-//1 -> 4
-//4  -> 5
-//5 -> 2
-//2 -> 3
-//3 -> 1
-// = 30
