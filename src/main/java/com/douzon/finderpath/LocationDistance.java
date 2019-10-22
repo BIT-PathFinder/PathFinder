@@ -3,13 +3,13 @@ package com.douzon.finderpath;
 public class LocationDistance {
 	public static void main(String[] args) {
 
-		// ¸¶ÀÏ(Mile) ´ÜÀ§
+		// ë§ˆì¼(Mile) ë‹¨ìœ„
 		double distanceMile = distance(35.173110, 129.071361, 35.179834, 129.076637, "");
 
-		// ¹ÌÅÍ(Meter) ´ÜÀ§
+		// ë¯¸í„°(Meter) ë‹¨ìœ„
 		double distanceMeter = distance(35.173110, 129.071361, 35.179834, 129.076637, "meter");
 
-		// Å³·Î¹ÌÅÍ(Kilo Meter) ´ÜÀ§
+		// í‚¬ë¡œë¯¸í„°(Kilo Meter) ë‹¨ìœ„
 		double distanceKiloMeter = distance(35.173110, 129.071361, 35.179834, 129.076637, "kilometer");
 
 		System.out.println(distanceMile);
@@ -19,13 +19,13 @@ public class LocationDistance {
 	}
 
 	/**
-	 * µÎ ÁöÁ¡°£ÀÇ °Å¸® °è»ê
+	 * ë‘ ì§€ì ê°„ì˜ ê±°ë¦¬ ê³„ì‚°
 	 *
-	 * @param lat1 ÁöÁ¡ 1 À§µµ
-	 * @param lon1 ÁöÁ¡ 1 °æµµ
-	 * @param lat2 ÁöÁ¡ 2 À§µµ
-	 * @param lon2 ÁöÁ¡ 2 °æµµ
-	 * @param unit °Å¸® Ç¥Ãâ´ÜÀ§
+	 * @param lat1 ì§€ì  1 ìœ„ë„
+	 * @param lon1 ì§€ì  1 ê²½ë„
+	 * @param lat2 ì§€ì  2 ìœ„ë„
+	 * @param lon2 ì§€ì  2 ê²½ë„
+	 * @param unit ê±°ë¦¬ í‘œì¶œë‹¨ìœ„
 	 * @return
 	 */
 	private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
