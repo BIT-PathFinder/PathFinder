@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mainaner="9m1i9n1"
+maintaner="9m1i9n1"
 app="pathfinder"
 
 container = `docker ps -a -q --no-trunc --filter name=^/$app$`
