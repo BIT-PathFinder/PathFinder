@@ -7,8 +7,14 @@ container = `docker ps -a -q --no-trunc --filter name=^/$app$`
 image=`docker images -q $maintaner/$app`
 script_path=$(dirname $(realpath $0))
 
-if [ -n "$container" ] || [ "$container" -eq "1" ] ;
-then docker rm -f "$container"
+if [ -z "$container"];
+then
+	echo "해당 컨테이너가 존재하지 않아 실행------------------"
+elif [ -n "$container" ] || [ "$container" -eq "1" ] ;
+then 
+	echo "해당 컨테이너가 존재하여 정지시키고 삭제------------"
+	docker stop "$container"
+	docker rm "$container"
 fi
 
 if [ -n "$image" ] || [ "$image" -eq 1 ]; 
