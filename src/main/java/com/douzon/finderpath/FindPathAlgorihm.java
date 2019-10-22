@@ -5,25 +5,25 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class FindPathAlgorihm {
-	static int N = 16; // N*N °æ·Î
-	static int[][] money; // ºñ¿ë
+	static int N = 16; // N*N ê²½ë¡œ
+	static int[][] money; // ë¹„ìš©
 	static String[][] test;
-	static int[] visited; // ¹æ¹®Ç¥½Ã
+	static int[] visited; // ë°©ë¬¸í‘œì‹œ
 	static String[] test2;
-	static int price; // ÃÖ¼Òºñ¿ë
+	static int price; // ìµœì†Œë¹„ìš©
 	static ArrayList<String> q = new ArrayList<String>();
-	static ArrayList<String> ÂğÅ¥ = new ArrayList<String>();
+	static ArrayList<String> ì°í = new ArrayList<String>();
 
 	static void DFS(int n, int s, int v) {
 
-		if (n >= N) { // ¸ğµÎ ¹æ¹®À» ÇÑ°æ¿ì
-			if (money[s][0] != 0) { // Ã³À½À¸·Î °£´Ù.
+		if (n >= N) { // ëª¨ë‘ ë°©ë¬¸ì„ í•œê²½ìš°
+			if (money[s][0] != 0) { // ì²˜ìŒìœ¼ë¡œ ê°„ë‹¤.
 				if (price > v) {
-					price = v; // Àû´Ù ±³È¯ ¤¡¤¡
-					ÂğÅ¥.clear();
-					ÂğÅ¥.add("0");
+					price = v; // ì ë‹¤ êµí™˜ ã„±ã„±
+					ì°í.clear();
+					ì°í.add("0");
 					for (String ss : q) {
-						ÂğÅ¥.add(ss);
+						ì°í.add(ss);
 					}
 				}
 			}
@@ -32,18 +32,18 @@ public class FindPathAlgorihm {
 
 		for (int i = 1; i < N; i++) {
 			if (visited[i] == 1)
-				continue; // ÀÌ¹Ì¹æ¹® ÇßÀ½
+				continue; // ì´ë¯¸ë°©ë¬¸ í–ˆìŒ
 			if (money[s][i] == 0)
-				continue; // 0Àº º®ÀÌ´Ù.
+				continue; // 0ì€ ë²½ì´ë‹¤.
 
-			// Áö±İ±îÁö ´©Àû ºñ¿ëÀÌ ÀÛÀ»¶§¸¸ µ¹¸°´Ù.
-			if (v + money[s][i] < price) { // ÀÌÀü¿¡ ±¸ÇÑ ÃÖ¼Òºñ¿ëº¸´Ù Àú·ÅÇÑ °æ¿ì¿¡¸¸ ¹æ¹®
-				// ¹æ¹® Ç¥½Ã ÇÏ°í
+			// ì§€ê¸ˆê¹Œì§€ ëˆ„ì  ë¹„ìš©ì´ ì‘ì„ë•Œë§Œ ëŒë¦°ë‹¤.
+			if (v + money[s][i] < price) { // ì´ì „ì— êµ¬í•œ ìµœì†Œë¹„ìš©ë³´ë‹¤ ì €ë ´í•œ ê²½ìš°ì—ë§Œ ë°©ë¬¸
+				// ë°©ë¬¸ í‘œì‹œ í•˜ê³ 
 				visited[i] = 1;
 				q.add(i + "");
 				DFS(n + 1, i, v + money[s][i]);
 
-				visited[i] = 0; // ¹æ¹®Ç¥½Ã Á¦°Å
+				visited[i] = 0; // ë°©ë¬¸í‘œì‹œ ì œê±°
 //            System.out.println(Arrays.toString(visited));
 				q.remove(q.size() - 1);
 			}
@@ -51,7 +51,7 @@ public class FindPathAlgorihm {
 	}
 
 	public static void main(String[] args) {
-		int ¹İº¹È½¼ö = 100;
+		int ë°˜ë³µíšŸìˆ˜ = 100;
 		String txt = "";
 
 		String fileName = "C:\\test.txt";
@@ -59,7 +59,7 @@ public class FindPathAlgorihm {
 
 			BufferedWriter fw = new BufferedWriter(new FileWriter(fileName, true));
 
-		for (int aaa = 0; aaa < ¹İº¹È½¼ö; ++aaa) {
+		for (int aaa = 0; aaa < ë°˜ë³µíšŸìˆ˜; ++aaa) {
 			money = new int[N][N];
 			visited = new int[N];
 			int row, col;
@@ -87,15 +87,15 @@ public class FindPathAlgorihm {
 
 			System.out.println();
 
-			price = Integer.MAX_VALUE; // ÃÖ¼Òºñ¿ëÀ» ±¸ÇØ¾ß ÇÏ±â ¶§¹®¿¡ ÃÖ´ë°ªÀ» ÀúÀåÇØµÒ
+			price = Integer.MAX_VALUE; // ìµœì†Œë¹„ìš©ì„ êµ¬í•´ì•¼ í•˜ê¸° ë•Œë¬¸ì— ìµœëŒ€ê°’ì„ ì €ì¥í•´ë‘ 
 
 			long startTime = System.currentTimeMillis();
-			DFS(1, 0, 0); // ¹æ¹®µµ½Ã °³¼ö, Ãâ¹ßµµ½Ã, ´©Àû ºñ¿ë
+			DFS(1, 0, 0); // ë°©ë¬¸ë„ì‹œ ê°œìˆ˜, ì¶œë°œë„ì‹œ, ëˆ„ì  ë¹„ìš©
 			long endTime = System.currentTimeMillis();
 
 			System.out.println(price);
 
-			System.out.println(ÂğÅ¥);
+			System.out.println(ì°í);
 			// Total time
 			long lTime = endTime - startTime;
 			System.out.println("TIME : " + lTime + "(ms)");
