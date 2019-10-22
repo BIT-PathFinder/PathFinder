@@ -3,7 +3,7 @@
 maintaner="9m1i9n1"
 app="pathfinder"
 
-container = `docker ps -a -q --no-trunc --filter name=^/$app$`
+container=`docker ps -a -q --no-trunc --filter name=^/$app$`
 image=`docker images -q $maintaner/$app`
 script_path=$(dirname $(realpath $0))
 
